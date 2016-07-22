@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/bmapView"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clickable="true" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/black_overlay"
+        >
+        <Button
+            android:id="@+id/bt_normal"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="普通"
+            android:layout_margin="10dp"
+            android:background="@color/white"
+            />
+        <Button
+            android:id="@+id/bt_traffic"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="交通"
+            android:layout_margin="10dp"
+            android:background="@color/white"
+            />
+        <Button
+            android:id="@+id/bt_heat"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="热力"
+            android:layout_margin="10dp"
+            android:background="@color/white"
+            />
+        <Button
+            android:id="@+id/bt_satellite"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="卫星"
+            android:layout_margin="10dp"
+            android:background="@color/white"
+            />
+        <Button
+            android:id="@+id/bt_search"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="搜索"
+            android:layout_margin="10dp"
+            android:background="@color/white"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>

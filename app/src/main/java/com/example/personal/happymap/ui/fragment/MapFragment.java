@@ -1,10 +1,12 @@
 package com.example.personal.happymap.ui.fragment;
 
 import android.app.Dialog;
+import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,16 +31,23 @@ import com.baidu.mapapi.search.poi.PoiDetailResult;
 import com.baidu.mapapi.search.poi.PoiIndoorResult;
 import com.baidu.mapapi.search.poi.PoiResult;
 import com.baidu.mapapi.search.poi.PoiSearch;
+import com.example.personal.happymap.MapUtils.MapLocationManager;
 import com.example.personal.happymap.MapUtils.MyPoiOverlay;
 import com.example.personal.happymap.R;
+import com.example.personal.happymap.utils.DateUtil;
 import com.example.personal.happymap.utils.DialogUtil;
+import com.example.personal.happymap.utils.FileUtil;
 import com.example.personal.happymap.utils.ToastUtil;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Date;
 
 /**
  * Created by dell on 2016/7/14.
  */
-public class MapFragment extends BaseLazyFragment implements View.OnClickListener {
-
+public class MapFragment extends BaseLazyFragment implements View.OnClickListener{
     private MapView mapView;
     private View view_fragment;
     private Button bt_normal;
@@ -53,6 +62,7 @@ public class MapFragment extends BaseLazyFragment implements View.OnClickListene
 
     private PoiSearch poiSearch;
     private OnGetPoiSearchResultListener poiListener;
+    private MapLocationManager mapLocationManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,6 +74,10 @@ public class MapFragment extends BaseLazyFragment implements View.OnClickListene
     public void onDestroy() {
         super.onDestroy();
         mapView.onDestroy();
+
+        if(mapLocationManager!=null){
+            mapLocationManager.stopLocation();
+        }
     }
 
     @Override
@@ -113,10 +127,18 @@ public class MapFragment extends BaseLazyFragment implements View.OnClickListene
         bt_search.setOnClickListener(this);
 
         poiSearch = PoiSearch.newInstance();
-        if(poiListener==null) {
+        if (poiListener == null) {
             poiListener = new MyPoiListener();
             poiSearch.setOnGetPoiSearchResultListener(poiListener);
         }
+
+        //地图加载成功开启定位
+        mBaiduMap.setOnMapLoadedCallback(new BaiduMap.OnMapLoadedCallback() {
+            @Override
+            public void onMapLoaded() {
+                location();
+            }
+        });
     }
 
     @Override
@@ -124,11 +146,12 @@ public class MapFragment extends BaseLazyFragment implements View.OnClickListene
 
     }
 
+
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.bt_heat:
-                mBaiduMap.setBaiduHeatMapEnabled(isHeat=!isHeat);
+                mBaiduMap.setBaiduHeatMapEnabled(isHeat = !isHeat);
                 break;
             case R.id.bt_normal:
                 mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
@@ -137,26 +160,28 @@ public class MapFragment extends BaseLazyFragment implements View.OnClickListene
                 mBaiduMap.setMapType(BaiduMap.MAP_TYPE_SATELLITE);
                 break;
             case R.id.bt_traffic:
-                mBaiduMap.setTrafficEnabled(isTraffic=!isTraffic);
+                mBaiduMap.setTrafficEnabled(isTraffic = !isTraffic);
                 break;
             case R.id.bt_search:
                 showSearchDialog();
+//                catchPicture();
                 break;
         }
     }
+
 
     //Poi检索监听
     class MyPoiListener implements OnGetPoiSearchResultListener {
         @Override
         public void onGetPoiResult(PoiResult poiResult) {
-            if(poiResult==null||poiResult.error== SearchResult.ERRORNO.RESULT_NOT_FOUND){
-                ToastUtil.show(getActivity(),"未找到结果");
+            if (poiResult == null || poiResult.error == SearchResult.ERRORNO.RESULT_NOT_FOUND) {
+                ToastUtil.show(getActivity(), "未找到结果");
                 return;
             }
-            if(poiResult.error==SearchResult.ERRORNO.NO_ERROR){
+            if (poiResult.error == SearchResult.ERRORNO.NO_ERROR) {
                 mBaiduMap.clear();
                 //创建PoiOverlay
-                PoiOverlay overlay = new MyPoiOverlay(poiSearch,mBaiduMap);
+                PoiOverlay overlay = new MyPoiOverlay(poiSearch, mBaiduMap);
                 //设置overlay可以处理标注点击事件
                 mBaiduMap.setOnMarkerClickListener(overlay);
                 //设置PoiOverlay数据
@@ -164,17 +189,17 @@ public class MapFragment extends BaseLazyFragment implements View.OnClickListene
                 //添加PoiOverlay到地图中
                 overlay.addToMap();
                 overlay.zoomToSpan();
-                ToastUtil.show(getActivity(),poiResult.getTotalPoiNum()+"个兴趣点，共"+poiResult.getTotalPageNum()+"页");
+                ToastUtil.show(getActivity(), poiResult.getTotalPoiNum() + "个兴趣点，共" + poiResult.getTotalPageNum() + "页");
                 return;
             }
         }
 
         @Override
         public void onGetPoiDetailResult(PoiDetailResult poiDetailResult) {
-            if(poiDetailResult.error!=PoiDetailResult.ERRORNO.NO_ERROR){
-                ToastUtil.show(getActivity(),"未查询到结果");
-            }else {
-                ToastUtil.show(getActivity(),poiDetailResult.getName()+":::"+
+            if (poiDetailResult.error != PoiDetailResult.ERRORNO.NO_ERROR) {
+                ToastUtil.show(getActivity(), "未查询到结果");
+            } else {
+                ToastUtil.show(getActivity(), poiDetailResult.getName() + ":::" +
                         poiDetailResult.getAddress());
             }
         }
@@ -183,10 +208,12 @@ public class MapFragment extends BaseLazyFragment implements View.OnClickListene
         public void onGetPoiIndoorResult(PoiIndoorResult poiIndoorResult) {
 
         }
-    };
+    }
 
-    private void showSearchDialog(){
-        View view = View.inflate(getActivity(),R.layout.dialog_poi_search,null);
+
+    //搜索兴趣点
+    private void showSearchDialog() {
+        View view = View.inflate(getActivity(), R.layout.dialog_poi_search, null);
         final Dialog dialog = DialogUtil.creatDialog(getActivity(), view);
         final EditText et_city = (EditText) view.findViewById(R.id.et_city);
         final EditText et_keyword = (EditText) view.findViewById(R.id.et_keyword);
@@ -199,8 +226,9 @@ public class MapFragment extends BaseLazyFragment implements View.OnClickListene
                 dialog.dismiss();
                 String city = et_city.getText().toString().trim();
                 String keyword = et_keyword.getText().toString().trim();
-                if(!TextUtils.isEmpty(city)&&!TextUtils.isEmpty(keyword));{
-                    MyPoiOverlay.citySearch(poiSearch,1,city,keyword);
+                if (!TextUtils.isEmpty(city) && !TextUtils.isEmpty(keyword)) ;
+                {
+                    MyPoiOverlay.citySearch(poiSearch, 1, city, keyword);
                 }
             }
         });
@@ -213,6 +241,42 @@ public class MapFragment extends BaseLazyFragment implements View.OnClickListene
         });
 
         dialog.show();
+    }
+
+    //截屏
+    private void catchPicture(){
+        mBaiduMap.snapshot(new BaiduMap.SnapshotReadyCallback() {
+            @Override
+            public void onSnapshotReady(Bitmap bitmap) {
+                File file = new File(FileUtil.PICTURE, DateUtil.dateToString(new Date())+".jpg");
+                FileOutputStream fos = null;
+                try {
+                    fos = new FileOutputStream(file);
+                    if(bitmap.compress(Bitmap.CompressFormat.JPEG,100,fos)){
+                        fos.flush();
+                        ToastUtil.show(getActivity(), "保存成功" + file.getPath());
+                        FileUtil.sendBroadcast(getActivity(),file);
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }finally {
+                    if(fos!=null){
+                        try {
+                            fos.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    //定位
+    private void location(){
+        mBaiduMap.setMyLocationEnabled(true);
+        mapLocationManager = new MapLocationManager(mBaiduMap);
+        mapLocationManager.startLocation();
     }
 
 }

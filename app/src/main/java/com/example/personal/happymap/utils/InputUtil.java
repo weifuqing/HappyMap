@@ -1,11 +1,14 @@
 package com.example.personal.happymap.utils;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.text.Html;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.Arrays;
 import java.util.List;
@@ -99,7 +102,6 @@ public class InputUtil {
                 return false;
             }
         }
-
         Character.UnicodeBlock ub = Character.UnicodeBlock.of(c);
         if ( ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS
                 || ub == Character.UnicodeBlock.CJK_COMPATIBILITY_IDEOGRAPHS
@@ -125,7 +127,29 @@ public class InputUtil {
         manager.hideSoftInputFromInputMethod(editText.getWindowToken(), 0);
     }
 
+    public static String changeStringColor(String s,String color){
+        String text = "<font color=\""+color+"\""+s+"</font>";
+        return text;
+    }
 
+    public static String changeStringBold(String s){
+        String text = "<b>"+s+"</b>";
+        return text;
+    }
+
+    public static void addHtmlImage(TextView tv,int imageId){
+        String s = "<img src=\""+imageId+"\"/>";
+        Html.ImageGetter imageGetter = new Html.ImageGetter() {
+            @Override
+            public Drawable getDrawable(String s) {
+                int id = Integer.parseInt(s);
+                Drawable drawable = ResourceUtil.getDrawable(id);
+                drawable.setBounds(0,0,300,200);
+                return drawable;
+            }
+        };
+        tv.append(Html.fromHtml(s,imageGetter,null));
+    }
 
 
 }

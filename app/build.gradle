@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.personal.happymap"
-        minSdkVersion 21
+        minSdkVersion 20
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
@@ -30,5 +30,20 @@ dependencies {
     compile files('libs/baidumapapi_radar_v4_0_0.jar')
     compile files('libs/baidumapapi_search_v4_0_0.jar')
     compile files('libs/baidumapapi_util_v4_0_0.jar')
-
+    compile files('libs/locSDK_6.23.jar')
+    compile files('libs/MobCommons-2016.0707.1708.jar')
+    compile files('libs/MobTools-2016.0707.1708.jar')
+    compile files('libs/ShareSDK-Core-2.7.4.jar')
+    compile files('libs/ShareSDK-Email-2.7.4.jar')
+    compile files('libs/ShareSDK-Facebook-2.7.4.jar')
+    compile files('libs/ShareSDK-QQ-2.7.4.jar')
+    compile files('libs/ShareSDK-QZone-2.7.4.jar')
+    compile files('libs/ShareSDK-ShortMessage-2.7.4.jar')
+    compile files('libs/ShareSDK-SinaWeibo-2.7.4.jar')
+    compile files('libs/ShareSDK-TencentWeibo-2.7.4.jar')
+    compile files('libs/ShareSDK-Twitter-2.7.4.jar')
+    compile files('libs/ShareSDK-Wechat-2.7.4.jar')
+    compile files('libs/ShareSDK-Wechat-Core-2.7.4.jar')
+    compile files('libs/ShareSDK-Wechat-Favorite-2.7.4.jar')
+    compile files('libs/ShareSDK-Wechat-Moments-2.7.4.jar')
 }

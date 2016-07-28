@@ -33,11 +33,31 @@
         <LinearLayout
             android:id="@+id/fullscreen_content_controls"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="100dp"
             android:layout_gravity="bottom|center_horizontal"
             android:background="@color/black_overlay"
             android:orientation="horizontal"
-            tools:ignore="UselessParent">
+            tools:ignore="UselessParent"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tv_map"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@color/blue"
+                android:gravity="center"
+                android:text="地图"
+                android:textColor="@color/white"/>
+            <TextView
+                android:id="@+id/tv_pending"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="@color/green"
+                android:text="pending"
+                android:textColor="@color/white"/>
 
         </LinearLayout>
     </FrameLayout>

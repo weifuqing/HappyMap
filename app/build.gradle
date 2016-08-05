@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.personal.happymap"
-        minSdkVersion 19
+        minSdkVersion 17
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
@@ -46,4 +46,5 @@ dependencies {
     compile files('libs/ShareSDK-Wechat-Core-2.7.4.jar')
     compile files('libs/ShareSDK-Wechat-Favorite-2.7.4.jar')
     compile files('libs/ShareSDK-Wechat-Moments-2.7.4.jar')
+    compile 'com.android.support:design:24.0.0'
 }

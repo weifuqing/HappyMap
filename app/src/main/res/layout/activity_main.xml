@@ -6,9 +6,6 @@
     android:background="@color/white"
     tools:context=".ui.activity.MainActivity">
 
-    <!-- The primary full-screen view. This can be replaced with whatever view
-         is needed to present your content, e.g. VideoView, SurfaceView,
-         TextureView, etc. -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -40,6 +37,7 @@
                 android:layout_height="match_parent"
                 android:background="@color/blue"
                 android:gravity="center"
+                android:textSize="18sp"
                 android:text="地图"
                 android:textColor="@color/white"/>
             <TextView
@@ -49,6 +47,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:background="@color/green"
+                android:textSize="18sp"
                 android:text="Mob"
                 android:textColor="@color/white"/>
 

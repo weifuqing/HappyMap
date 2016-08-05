@@ -9,15 +9,24 @@ import android.widget.TextView;
 
 import com.example.personal.happymap.R;
 import com.example.personal.happymap.utils.DialogUtil;
+import com.example.personal.happymap.utils.ToastUtil;
+
+import java.util.HashMap;
+
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.PlatformActionListener;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.sina.weibo.SinaWeibo;
 
 /**
  * Created by dell on 2016/7/27.
  */
-public class MobFragment extends BaseLazyFragment {
+public class MobFragment extends BaseLazyFragment{
 
     View view;
     TextView tv_log;
     TextView tv_share;
+    PlatformActionListener platformListener;
 
     @Nullable
     @Override
@@ -44,7 +53,7 @@ public class MobFragment extends BaseLazyFragment {
         tv_log.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                login();
             }
         });
 
@@ -56,5 +65,32 @@ public class MobFragment extends BaseLazyFragment {
                         "http://www.sina.com/","评论","标题site","https://www.hao123.com");
             }
         });
+    }
+
+    private void login(){
+
+        Platform weibo = ShareSDK.getPlatform(SinaWeibo.NAME);
+        weibo.SSOSetting(false);  //设置false表示使用SSO授权方式
+        platformListener = new MyPlatformListener();
+        weibo.setPlatformActionListener(platformListener); // 设置分享事件回调
+        weibo.authorize();
+    }
+
+    class MyPlatformListener implements PlatformActionListener{
+
+        @Override
+        public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+            ToastUtil.show(getActivity(), (String) hashMap.get("nickname"));
+        }
+
+        @Override
+        public void onError(Platform platform, int i, Throwable throwable) {
+            ToastUtil.show(getActivity(),"授权失败");
+        }
+
+        @Override
+        public void onCancel(Platform platform, int i) {
+
+        }
     }
 }

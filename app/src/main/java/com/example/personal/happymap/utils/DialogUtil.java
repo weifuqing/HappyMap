@@ -36,7 +36,6 @@ public class DialogUtil {
     public static void showShare(Context context,String title,String titleUrl,String text,
                            String imageUrl,
                            String url,String comment,String site,String siteUrl) {
-        ShareSDK.initSDK(context);
         OnekeyShare oks = new OnekeyShare();
         //关闭sso授权
         oks.disableSSOWhenAuthorize();

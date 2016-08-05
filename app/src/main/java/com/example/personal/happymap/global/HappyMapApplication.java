@@ -8,6 +8,8 @@ import com.example.personal.happymap.utils.FileUtil;
 
 import java.io.File;
 
+import cn.sharesdk.framework.ShareSDK;
+
 /**
  * Created by dell on 2016/7/15.
  */
@@ -22,6 +24,8 @@ public class HappyMapApplication extends Application {
         gContext = this;
         //地图初始化
         SDKInitializer.initialize(this);
+        //shareSdk初始化
+        ShareSDK.initSDK(this);
         if(!FileUtil.SDCARD.exists()){
             FileUtil.SDCARD.mkdirs();
         }

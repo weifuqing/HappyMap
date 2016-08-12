@@ -1,4 +1,4 @@
-package com.example.personal.happymap.MapUtils;
+package com.example.personal.happymap.mapUtils;
 
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.model.LatLng;

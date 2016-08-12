@@ -7,8 +7,10 @@ import com.baidu.mapapi.SDKInitializer;
 import com.example.personal.happymap.utils.FileUtil;
 
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 import cn.sharesdk.framework.ShareSDK;
+import okhttp3.OkHttpClient;
 
 /**
  * Created by dell on 2016/7/15.
@@ -40,5 +42,14 @@ public class HappyMapApplication extends Application {
 
     public static String getApplicationName(){
         return APPLICATION_NAME;
+    }
+
+    public static OkHttpClient defaultOkHttpClient(){
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(3, TimeUnit.SECONDS)
+                .writeTimeout(3,TimeUnit.SECONDS)
+                .readTimeout(3,TimeUnit.SECONDS)
+                .build();
+        return client;
     }
 }

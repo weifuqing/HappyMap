@@ -1,7 +1,6 @@
-package com.example.personal.happymap.MapUtils;
+package com.example.personal.happymap.mapUtils;
 
 import android.app.Service;
-import android.location.LocationListener;
 import android.os.Vibrator;
 
 import com.baidu.location.BDLocation;

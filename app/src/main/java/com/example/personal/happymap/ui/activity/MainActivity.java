@@ -20,8 +20,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     private TextView tv_map;
     private TextView tv_mob;
+    private TextView tv_girls;
 
-    private Fragment currentFragment,mapFragment, mobFragment;
+    private Fragment currentFragment,mapFragment, mobFragment,girlsFragment;
 
 
     @Override
@@ -39,12 +40,14 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     public void initView(){
         tv_map = (TextView) findViewById(R.id.tv_map);
         tv_mob = (TextView) findViewById(R.id.tv_mob);
+        tv_girls = (TextView) findViewById(R.id.tv_girls);
 
     }
 
     public void initListener(){
         tv_map.setOnClickListener(this);
         tv_mob.setOnClickListener(this);
+        tv_girls.setOnClickListener(this);
     }
 
     @Override
@@ -64,6 +67,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             case R.id.tv_mob:
                 if(mobFragment ==null){
                     mobFragment = new MobFragment();
+                }
+                changeFragment(getSupportFragmentManager().beginTransaction(), mobFragment,"mob");
+                break;
+            case R.id.tv_girls:
+                if(mobFragment ==null){
+                    girlsFragment = new MobFragment();
                 }
                 changeFragment(getSupportFragmentManager().beginTransaction(), mobFragment,"mob");
                 break;

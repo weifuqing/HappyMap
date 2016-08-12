@@ -1,4 +1,4 @@
-package com.example.personal.happymap.MapUtils;
+package com.example.personal.happymap.mapUtils;
 
 /**
  * Created by dell on 2016/7/25.

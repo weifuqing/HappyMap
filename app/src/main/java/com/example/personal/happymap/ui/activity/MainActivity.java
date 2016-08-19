@@ -6,15 +6,21 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.personal.happymap.R;
+import com.example.personal.happymap.ui.fragment.GirlsFragment;
 import com.example.personal.happymap.ui.fragment.MapFragment;
 import com.example.personal.happymap.ui.fragment.MobFragment;
 import com.example.personal.happymap.utils.ToastUtil;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 public class MainActivity extends FragmentActivity implements View.OnClickListener{
 
@@ -24,12 +30,17 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     private Fragment currentFragment,mapFragment, mobFragment,girlsFragment;
 
+    Unbinder unbinder;
+
+    @BindView(R.id.tb_home)
+    Toolbar tb_home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+        unbinder = ButterKnife.bind(this);
 
         initView();
         initListener();
@@ -41,7 +52,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         tv_map = (TextView) findViewById(R.id.tv_map);
         tv_mob = (TextView) findViewById(R.id.tv_mob);
         tv_girls = (TextView) findViewById(R.id.tv_girls);
-
+        tb_home.setTitle("HappyMap");
     }
 
     public void initListener(){
@@ -71,10 +82,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 changeFragment(getSupportFragmentManager().beginTransaction(), mobFragment,"mob");
                 break;
             case R.id.tv_girls:
-                if(mobFragment ==null){
-                    girlsFragment = new MobFragment();
+                if(girlsFragment ==null){
+                    girlsFragment = new GirlsFragment();
                 }
-                changeFragment(getSupportFragmentManager().beginTransaction(), mobFragment,"mob");
+                changeFragment(getSupportFragmentManager().beginTransaction(), girlsFragment,"girls");
                 break;
         }
     }
@@ -110,5 +121,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             return true;
         }
         return super.onKeyDown(keyCode,event);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbinder.unbind();
     }
 }

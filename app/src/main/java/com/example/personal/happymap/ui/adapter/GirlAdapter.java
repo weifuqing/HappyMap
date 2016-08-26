@@ -50,7 +50,8 @@ public class GirlAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
 
-        View view = layoutInflater.inflate(R.layout.item_girl_detail,container);
+//        View view = layoutInflater.inflate(R.layout.item_girl_detail,null);
+        View view = layoutInflater.inflate(R.layout.item_girl_detail,container,false);
         String imageUrl = datas.get(position).getUrl();
         PinchImageView pinchImageView = (PinchImageView) view.findViewById(R.id.iv_girl_detail);
         Glide.with(context)
@@ -63,8 +64,9 @@ public class GirlAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        super.destroyItem(container, position, object);
-        container.removeViewAt(position);
+//        super.destroyItem(container, position, object);
+//        container.removeViewAt(position);  Error
+        container.removeView((View) object);
     }
 
     @Override

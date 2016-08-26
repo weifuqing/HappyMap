@@ -2,72 +2,80 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".ui.activity.MainActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/tb_home"
+    <android.support.design.widget.CollapsingToolbarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    </android.support.v7.widget.Toolbar>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/tb_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.CollapsingToolbarLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
+
         <RelativeLayout
             android:id="@+id/rl_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
         </RelativeLayout>
-        </RelativeLayout>
+    </RelativeLayout>
 
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/black_overlay"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:padding="5dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black_overlay"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="5dp">
 
-            <TextView
-                android:id="@+id/tv_map"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:background="@color/blue"
-                android:gravity="center"
-                android:textSize="18sp"
-                android:text="地图"
-                android:textColor="@color/white"/>
-            <TextView
-                android:id="@+id/tv_mob"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:background="@color/green"
-                android:textSize="18sp"
-                android:text="Mob"
-                android:textColor="@color/white"/>
-            <TextView
-                android:id="@+id/tv_girls"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:background="@color/red"
-                android:textSize="18sp"
-                android:text="GIRL"
-                android:textColor="@color/white"/>
+        <TextView
+            android:id="@+id/tv_map"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/blue"
+            android:gravity="center"
+            android:text="地图"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_mob"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/green"
+            android:gravity="center"
+            android:text="Mob"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_girls"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/red"
+            android:gravity="center"
+            android:text="GIRL"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </LinearLayout>
 
 </LinearLayout>

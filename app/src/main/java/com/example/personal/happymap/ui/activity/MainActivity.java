@@ -1,6 +1,7 @@
 package com.example.personal.happymap.ui.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -8,6 +9,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,7 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class MainActivity extends FragmentActivity implements View.OnClickListener{
+public class MainActivity extends BaseActivity implements View.OnClickListener{
 
     private TextView tv_map;
     private TextView tv_mob;
@@ -53,6 +56,24 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         tv_mob = (TextView) findViewById(R.id.tv_mob);
         tv_girls = (TextView) findViewById(R.id.tv_girls);
         tb_home.setTitle("HappyMap");
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_about:
+                startActivity(new Intent(this,AboutMeActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
 
     public void initListener(){

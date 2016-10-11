@@ -46,7 +46,8 @@
 
         <activity android:name=".ui.activity.GirlActivity"/>
 
-        <activity android:name=".ui.activity.AboutMeActivity"/>
+        <activity android:name=".ui.activity.AboutMeActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <!--百度定位-->
         <service

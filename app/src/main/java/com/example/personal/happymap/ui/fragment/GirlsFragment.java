@@ -16,6 +16,7 @@ import com.example.personal.happymap.data.contract.GirlsContract;
 import com.example.personal.happymap.data.contract.GirlsPresenter;
 import com.example.personal.happymap.ui.activity.GirlActivity;
 import com.example.personal.happymap.ui.adapter.GirlsAdapter;
+import com.example.personal.happymap.utils.ToastUtil;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
@@ -53,13 +54,13 @@ public class GirlsFragment extends BaseLazyFragment implements GirlsContract.Vie
         unbinder = ButterKnife.bind(this, view);
         initView();
         mPresenter = new GirlsPresenter(this);
+        mPresenter.start();
         initListener();
         return view;
     }
 
     @Override
     public void fetchData() {
-        mPresenter.start();
     }
 
     @Override

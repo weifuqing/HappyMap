@@ -19,4 +19,5 @@ public class ResourceUtil {
         Drawable drawable = HappyMapApplication.getgContext().getResources().getDrawable(drawableId);
         return drawable;
     }
+
 }

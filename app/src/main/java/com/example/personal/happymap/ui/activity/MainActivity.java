@@ -56,6 +56,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         tv_mob = (TextView) findViewById(R.id.tv_mob);
         tv_girls = (TextView) findViewById(R.id.tv_girls);
         tb_home.setTitle("HappyMap");
+        setSupportActionBar(tb_home);
     }
 
     @Override

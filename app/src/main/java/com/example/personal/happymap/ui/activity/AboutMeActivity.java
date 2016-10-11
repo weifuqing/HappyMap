@@ -1,5 +1,6 @@
 package com.example.personal.happymap.ui.activity;
 
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
@@ -27,6 +28,13 @@ public class AboutMeActivity extends BaseActivity {
     ImageView iv_about_title;
 
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initView();
+        initListener();
+    }
+
+    @Override
     void initView() {
         setContentView(R.layout.activity_aboutme);
         unbinder = ButterKnife.bind(this);
@@ -36,7 +44,7 @@ public class AboutMeActivity extends BaseActivity {
 
         Glide.with(this)
                 .load(Netaddress.currentGirl)
-                .bitmapTransform(new BlurTransformation(this,15))//毛玻璃效果
+                .bitmapTransform(new BlurTransformation(this, 15))//毛玻璃效果
                 .into(iv_about_title);
 
     }
@@ -54,6 +62,7 @@ public class AboutMeActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unbinder.unbind();
+        if (unbinder != null)
+            unbinder.unbind();
     }
 }

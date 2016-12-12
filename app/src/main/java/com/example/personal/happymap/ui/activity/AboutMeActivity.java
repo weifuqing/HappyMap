@@ -30,15 +30,16 @@ public class AboutMeActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initView();
-        initListener();
+    }
+
+    @Override
+    int getLayoutId() {
+        return R.layout.activity_aboutme;
     }
 
     @Override
     void initView() {
-        setContentView(R.layout.activity_aboutme);
         unbinder = ButterKnife.bind(this);
-
         tb_about.setTitle("关于我");
         tb_about.setNavigationIcon(R.drawable.ic_back);
 
@@ -57,6 +58,11 @@ public class AboutMeActivity extends BaseActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    void initData() {
+
     }
 
     @Override

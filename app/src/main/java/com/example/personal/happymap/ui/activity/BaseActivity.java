@@ -12,8 +12,12 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(getLayoutId());
+        initView();
+        initListener();
     }
-
+    abstract int getLayoutId();
     abstract void initView();
     abstract void initListener();
+    abstract void initData();
 }

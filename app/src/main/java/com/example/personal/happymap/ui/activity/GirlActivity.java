@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v4.view.ViewPager;
@@ -13,12 +14,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 
 import com.example.personal.happymap.R;
 import com.example.personal.happymap.data.bean.GirlsBean;
 import com.example.personal.happymap.ui.adapter.GirlAdapter;
 import com.example.personal.happymap.ui.view.PinchImageView;
 import com.example.personal.happymap.utils.BitmapUtil;
+import com.example.personal.happymap.utils.ColorUtil;
 import com.example.personal.happymap.utils.FileUtil;
 import com.example.personal.happymap.utils.ToastUtil;
 
@@ -54,15 +57,16 @@ public class GirlActivity extends BaseActivity implements ViewPager.OnPageChange
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initView();
-        initListener();
+    }
+
+    @Override
+    int getLayoutId() {
+        return R.layout.activity_girl;
     }
 
     @Override
     void initView() {
-        setContentView(R.layout.activity_girl);
         unbinder = ButterKnife.bind(this);
-
         Intent intent = getIntent();
         datas = intent.getParcelableArrayListExtra("girls");
         current = intent.getIntExtra("current", 0);
@@ -86,6 +90,11 @@ public class GirlActivity extends BaseActivity implements ViewPager.OnPageChange
                 finish();
             }
         });
+    }
+
+    @Override
+    void initData() {
+
     }
 
     @Override
@@ -122,9 +131,18 @@ public class GirlActivity extends BaseActivity implements ViewPager.OnPageChange
                 if (vir == null) {
                     return;
                 }
-                tb_girl.setBackgroundColor(vir.getRgb());
+                changeStatusBar(vir.getRgb());
             }
         });
+    }
+
+    private void changeStatusBar(int color){
+        tb_girl.setBackgroundColor(color);
+        if (Build.VERSION.SDK_INT >= 21) {
+            Window window = getWindow();
+            window.setStatusBarColor(ColorUtil.colorBurn(color));
+            window.setNavigationBarColor(ColorUtil.colorBurn(color));
+        }
     }
 
     private void saveGirl() {

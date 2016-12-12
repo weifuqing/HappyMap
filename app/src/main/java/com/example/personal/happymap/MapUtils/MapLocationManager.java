@@ -47,7 +47,9 @@ public class MapLocationManager {
     //振动器设备
     private Vibrator mVibrator;
 
-    public MapLocationManager(BaiduMap baiduMap){
+    private boolean firtstTime = true;
+
+    public MapLocationManager(BaiduMap baiduMap) {
         this.baiduMap = baiduMap;
         init();
     }
@@ -89,10 +91,10 @@ public class MapLocationManager {
     }
 
     public void stopLocation() {
-        if(locationListener!=null){
+        if (locationListener != null) {
             locationClient.unRegisterLocationListener(locationListener);
         }
-        if(notifyListener!=null){
+        if (notifyListener != null) {
             locationClient.removeNotifyEvent(notifyListener);
         }
         locationClient.stop();
@@ -136,10 +138,19 @@ public class MapLocationManager {
             LatLng latLng = new LatLng(latitude, longitude);
             //MapStatusUpdate mapStatusUpdate = MapStatusUpdateFactory.newLatLng(latLng);
 
-            MapStatus mapStatus = new MapStatus.Builder()
-                    .target(latLng)
-                    .zoom(15)
-                    .build();
+            MapStatus mapStatus;
+            if (firtstTime) {
+
+                mapStatus = new MapStatus.Builder()
+                        .target(latLng)
+                        .zoom(15)
+                        .build();
+                firtstTime = false;
+            } else {
+                mapStatus = new MapStatus.Builder()
+                        .target(latLng)
+                        .build();
+            }
             MapStatusUpdate mapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mapStatus);
 
             baiduMap.animateMapStatus(mapStatusUpdate);

@@ -41,17 +41,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
 
-        setContentView(R.layout.activity_main);
-        unbinder = ButterKnife.bind(this);
-
-        initView();
-        initListener();
-        tv_map.callOnClick();
-//        tv_mob.callOnClick();
+    @Override
+    int getLayoutId() {
+        return R.layout.activity_main;
     }
 
     public void initView(){
+        unbinder = ButterKnife.bind(this);
         tv_map = (TextView) findViewById(R.id.tv_map);
         tv_mob = (TextView) findViewById(R.id.tv_mob);
         tv_girls = (TextView) findViewById(R.id.tv_girls);
@@ -81,6 +79,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         tv_map.setOnClickListener(this);
         tv_mob.setOnClickListener(this);
         tv_girls.setOnClickListener(this);
+    }
+
+    @Override
+    void initData() {
+        tv_map.callOnClick();
     }
 
     @Override

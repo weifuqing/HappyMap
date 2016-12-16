@@ -15,6 +15,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(getLayoutId());
         initView();
         initListener();
+        initData();
     }
     abstract int getLayoutId();
     abstract void initView();

@@ -16,6 +16,7 @@ import java.net.URI;
  */
 public class FileUtil {
 
+
     public static final File SDCARD = new File(Environment.getExternalStorageDirectory(),
             HappyMapApplication.getApplicationName());
 

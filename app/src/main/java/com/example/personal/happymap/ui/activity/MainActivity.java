@@ -1,21 +1,18 @@
 package com.example.personal.happymap.ui.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.personal.happymap.R;
+import com.example.personal.happymap.base.BaseActivity;
 import com.example.personal.happymap.ui.fragment.GirlsFragment;
 import com.example.personal.happymap.ui.fragment.MapFragment;
 import com.example.personal.happymap.ui.fragment.MobFragment;

@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.personal.happymap.R;
+import com.example.personal.happymap.base.BaseActivity;
 import com.example.personal.happymap.network.Netaddress;
 
 import butterknife.BindView;

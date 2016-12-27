@@ -1,4 +1,4 @@
-package com.example.personal.happymap.ui.activity;
+package com.example.personal.happymap.base;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -17,8 +17,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         initListener();
         initData();
     }
-    abstract int getLayoutId();
-    abstract void initView();
-    abstract void initListener();
-    abstract void initData();
+    public abstract int getLayoutId();
+    public abstract void initView();
+    public abstract void initListener();
+    public abstract void initData();
 }

@@ -1,4 +1,4 @@
-package com.example.personal.happymap.ui.fragment;
+package com.example.personal.happymap.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.personal.happymap.R;
+import com.example.personal.happymap.base.BaseLazyFragment;
 import com.example.personal.happymap.utils.DialogUtil;
 import com.example.personal.happymap.utils.ToastUtil;
 
@@ -21,7 +22,7 @@ import cn.sharesdk.sina.weibo.SinaWeibo;
 /**
  * Created by dell on 2016/7/27.
  */
-public class MobFragment extends BaseLazyFragment{
+public class MobFragment extends BaseLazyFragment {
 
     View view;
     TextView tv_log;

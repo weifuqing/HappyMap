@@ -11,12 +11,12 @@ import android.view.ViewGroup;
 import android.view.ViewStub;
 
 import com.example.personal.happymap.R;
+import com.example.personal.happymap.base.BaseLazyFragment;
 import com.example.personal.happymap.data.bean.GirlsBean;
 import com.example.personal.happymap.data.contract.GirlsContract;
 import com.example.personal.happymap.data.contract.GirlsPresenter;
 import com.example.personal.happymap.ui.activity.GirlActivity;
 import com.example.personal.happymap.ui.adapter.GirlsAdapter;
-import com.example.personal.happymap.utils.ToastUtil;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 

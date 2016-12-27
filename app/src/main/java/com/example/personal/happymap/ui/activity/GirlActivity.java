@@ -2,21 +2,19 @@ package com.example.personal.happymap.ui.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 
 import com.example.personal.happymap.R;
+import com.example.personal.happymap.base.BaseActivity;
 import com.example.personal.happymap.data.bean.GirlsBean;
 import com.example.personal.happymap.ui.adapter.GirlAdapter;
 import com.example.personal.happymap.ui.view.PinchImageView;

@@ -22,6 +22,7 @@ import com.baidu.mapapi.search.poi.PoiDetailResult;
 import com.baidu.mapapi.search.poi.PoiIndoorResult;
 import com.baidu.mapapi.search.poi.PoiResult;
 import com.baidu.mapapi.search.poi.PoiSearch;
+import com.example.personal.happymap.base.BaseLazyFragment;
 import com.example.personal.happymap.mapUtils.MapLocationManager;
 import com.example.personal.happymap.mapUtils.MyPoiOverlay;
 import com.example.personal.happymap.R;

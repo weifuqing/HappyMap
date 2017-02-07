@@ -41,7 +41,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     }
 
     @Override
-    int getLayoutId() {
+    public int getLayoutId() {
         return R.layout.activity_main;
     }
 
@@ -79,7 +79,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     }
 
     @Override
-    void initData() {
+    public void initData() {
         tv_map.callOnClick();
     }
 

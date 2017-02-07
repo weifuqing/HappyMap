@@ -58,12 +58,12 @@ public class GirlActivity extends BaseActivity implements ViewPager.OnPageChange
     }
 
     @Override
-    int getLayoutId() {
+    public int getLayoutId() {
         return R.layout.activity_girl;
     }
 
     @Override
-    void initView() {
+    public void initView() {
         unbinder = ButterKnife.bind(this);
         Intent intent = getIntent();
         datas = intent.getParcelableArrayListExtra("girls");
@@ -80,7 +80,7 @@ public class GirlActivity extends BaseActivity implements ViewPager.OnPageChange
     }
 
     @Override
-    void initListener() {
+    public void initListener() {
 
         tb_girl.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +91,7 @@ public class GirlActivity extends BaseActivity implements ViewPager.OnPageChange
     }
 
     @Override
-    void initData() {
+    public void initData() {
 
     }
 

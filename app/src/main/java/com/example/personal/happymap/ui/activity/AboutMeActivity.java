@@ -34,12 +34,12 @@ public class AboutMeActivity extends BaseActivity {
     }
 
     @Override
-    int getLayoutId() {
+    public int getLayoutId() {
         return R.layout.activity_aboutme;
     }
 
     @Override
-    void initView() {
+    public void initView() {
         unbinder = ButterKnife.bind(this);
         tb_about.setTitle("关于我");
         tb_about.setNavigationIcon(R.drawable.ic_back);
@@ -52,7 +52,7 @@ public class AboutMeActivity extends BaseActivity {
     }
 
     @Override
-    void initListener() {
+    public void initListener() {
         tb_about.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,7 +62,7 @@ public class AboutMeActivity extends BaseActivity {
     }
 
     @Override
-    void initData() {
+    public void initData() {
 
     }
 
